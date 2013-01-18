@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/display_lcd_message_dialog_scroll_view"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <!-- Message -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message (Max. 32 characters):"
+            android:textSize="20dp"></TextView>
+        <EditText
+            android:id="@+id/display_lcd_message_dialog_edit_text_message"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <requestFocus></requestFocus>
+        </EditText>
+    </LinearLayout>
+</ScrollView>

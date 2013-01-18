@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/modify_pin_dialog_scroll_view"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5"
+            android:padding="10dp">
+
+            <!-- Timeout -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Timeout:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_timeout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <requestFocus></requestFocus>
+            </EditText>
+
+            <!-- Timeout 2 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Timeout 2:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_timeout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- Format String -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Format String:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_format_string"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- PIN Block String -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PIN Block String:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_pin_block_string"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- PIN Length Format -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PIN Length Format:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_pin_length_format"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- Insertion Offset Old -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Insertion Offset Old:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_insertion_offset_old"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- Insertion Offset New -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Insertion Offset New:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_insertion_offset_new"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- PIN Max Extra Digit -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PIN Max Extra Digit:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_pin_max_extra_digit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- Confirm PIN -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm PIN:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_confirm_pin"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5"
+            android:padding="10dp">
+
+            <!-- Entry Validation Condition -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Entry Validation Condition:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_entry_validation_condition"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- Number Message -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Number Message:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_number_message"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- Lang ID -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lang ID:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_lang_id"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- Msg Index 1 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Msg Index 1:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_msg_index1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- Msg Index 2 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Msg Index 2:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_msg_index2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- Msg Index 3 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Msg Index 3:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_msg_index3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- Teo Prologue -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teo Prologue:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_teo_prologue"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+            <!-- Data -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data:"
+                android:textSize="20dp"></TextView>
+            <EditText
+                android:id="@+id/modify_pin_dialog_edit_text_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </EditText>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

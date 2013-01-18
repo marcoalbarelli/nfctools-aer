@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/read_key_dialog_scroll_view"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <!-- Timeout -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Timeout:"
+            android:textSize="20dp"></TextView>
+        <EditText
+            android:id="@+id/read_key_dialog_edit_text_timeout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <requestFocus></requestFocus>
+        </EditText>
+
+        <!-- PIN Max Extra Digit -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PIN Max Extra Digit:"
+            android:textSize="20dp"></TextView>
+        <EditText
+            android:id="@+id/read_key_dialog_edit_text_pin_max_extra_digit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+
+        <!-- Key Return Condition -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Key Return Condition:"
+            android:textSize="20dp"></TextView>
+        <EditText
+            android:id="@+id/read_key_dialog_edit_text_key_return_condition"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+
+        <!-- Echo LCD Start Position -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Echo LCD Start Position:"
+            android:textSize="20dp"></TextView>
+        <EditText
+            android:id="@+id/read_key_dialog_edit_text_echo_lcd_start_position"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+
+        <!-- Echo LCD Mode -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Echo LCD Mode:"
+            android:textSize="20dp"></TextView>
+        <EditText
+            android:id="@+id/read_key_dialog_edit_text_echo_lcd_mode"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+    </LinearLayout>
+</ScrollView>
