@@ -50,13 +50,13 @@ public class ReaderApduTag extends Tag implements ApduTag {
 
 	private byte[] convertCommand(Command command) {
 		if (command.hasData()) {
-			// TODO not sure if this conversion is correct
-			byte[] buffer = new byte[command.getLength() + 4];
+			byte[] buffer = new byte[command.getLength() + 5];
 			buffer[0] = (byte)Apdu.CLS_PTS;
 			buffer[1] = (byte)command.getInstruction();
 			buffer[2] = (byte)command.getP1();
 			buffer[3] = (byte)command.getP2();
-			System.arraycopy(command.getData(), 0, buffer, 4, command.getLength());
+			buffer[4] = (byte)command.getLength();
+			System.arraycopy(command.getData(), 0, buffer, 5, command.getLength());
 			return buffer;
 		}
 		else {

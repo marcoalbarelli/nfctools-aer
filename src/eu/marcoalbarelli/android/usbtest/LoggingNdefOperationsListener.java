@@ -22,10 +22,6 @@ public class LoggingNdefOperationsListener implements NdefOperationsListener {
 				for (Record record : messages) {
 					Log.i(NFCTOOLS, "NDEF: " + record);
 				}
-				
-				UriRecord uriRecord = new UriRecord("http://www.grundid.de/nfc");
-				ndefOperations.writeNdefMessage(uriRecord);
-				
 			}
 			else {
 				Log.i(NFCTOOLS, "no messages on TAG");
