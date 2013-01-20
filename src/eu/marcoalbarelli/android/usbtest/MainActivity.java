@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.nfctools.ndef.NdefOperationsListener;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -36,8 +38,6 @@ import com.acs.smartcard.PinProperties;
 import com.acs.smartcard.PinVerify;
 import com.acs.smartcard.ReadKeyOption;
 import com.acs.smartcard.Reader;
-import com.acs.smartcard.Reader.OnStateChangeListener;
-import com.acs.smartcard.ReaderException;
 import com.acs.smartcard.TlvProperties;
 
 
@@ -183,6 +183,8 @@ public class MainActivity extends Activity {
                         // Clear slot items
                         mSlotAdapter.clear();
 
+                        
+                        //Leave this alone: we need it to reset the reader just in case                        
                         // Close reader
                         logMsg("Closing reader...");
                         new CloseTask().execute();
@@ -579,7 +581,12 @@ public class MainActivity extends Activity {
 
         // Initialize reader
         mReader = new Reader(mManager);
-        mReader.setOnStateChangeListener(new OnStateChangeListener() {
+        
+        NdefOperationsListener ndefListener = new NdefReader();
+        ReaderStateChangeListener rscl = new ReaderStateChangeListener(mReader, ndefListener);
+        mReader.setOnStateChangeListener(rscl);
+        
+        /*mReader.setOnStateChangeListener(new OnStateChangeListener() {
 
             @Override
             public void onStateChange(int slotNum, int prevState, int currState) {
@@ -593,14 +600,13 @@ public class MainActivity extends Activity {
                         || currState > Reader.CARD_SPECIFIC) {
                     currState = Reader.CARD_UNKNOWN;
                 }
-                /**
-                 * Here is the place where we need tu plug the NFC-Tools library in
-                 * We send byte[] commands and receive byte[] responses
-                 * The following command reads the second page of a Ultralight Tag
-                 * We need to properly power the device up and set protocols
-                 * The powering off is handled by other listeners so we don't need to worry about that
-                 */
-
+                
+//                  Here is the place where we need to plug the NFC-Tools library in
+//                  We send byte[] commands and receive byte[] responses
+//                  The following command reads the second page of a Ultralight Tag
+//                  We need to properly power the device up and set protocols
+//                  The powering off is handled by other listeners so we don't need to worry about that
+                 
                 // Create output string
                 byte[] command; 
                 command = new byte[] { (byte) 0xFF,(byte) 0xB0, 0x00, 0x08, 0x10 };
@@ -637,9 +643,10 @@ public class MainActivity extends Activity {
                     }
                 });
             }
-        });
+        });*/
 
         // Register receiver for USB permission
+        //Redundant since we use a intent-filter in teh manifest 
         mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(
                 ACTION_USB_PERMISSION), 0);
         IntentFilter filter = new IntentFilter();
