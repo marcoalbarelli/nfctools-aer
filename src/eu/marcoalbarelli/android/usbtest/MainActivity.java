@@ -192,7 +192,67 @@ public class MainActivity extends Activity {
         }
     };
 
-    private class OpenTask extends AsyncTask<UsbDevice, Void, Exception> {
+    private final class OnStateChangeListenerImplementation implements OnStateChangeListener {
+
+		@Override
+		public void onStateChange(int slotNum, int prevState, int currState) {
+
+		    if (prevState < Reader.CARD_UNKNOWN
+		            || prevState > Reader.CARD_SPECIFIC) {
+		        prevState = Reader.CARD_UNKNOWN;
+		    }
+
+		    if (currState < Reader.CARD_UNKNOWN
+		            || currState > Reader.CARD_SPECIFIC) {
+		        currState = Reader.CARD_UNKNOWN;
+		    }
+		    /**
+		     * Here is the place where we need tu plug the NFC-Tools library in
+		     * We send byte[] commands and receive byte[] responses
+		     * The following command reads the second page of a Ultralight Tag
+		     * We need to properly power the device up and set protocols
+		     * The powering off is handled by other listeners so we don't need to worry about that
+		     */
+
+		    // Create output string
+		    byte[] command; 
+		    command = new byte[] { (byte) 0xFF,(byte) 0xB0, 0x00, 0x08, 0x10 };
+			byte[] response = new byte[300];
+			String readOut ="";
+			//No use in tryng to read a card that's not there
+			if(currState == Reader.CARD_PRESENT){
+			try {
+				mReader.power(slotNum,
+						Reader.CARD_WARM_RESET);
+				mReader.setProtocol(slotNum, Reader.PROTOCOL_T0
+						| Reader.PROTOCOL_T1);
+				mReader.transmit(slotNum,
+							command, command.length, response,
+							response.length);
+				readOut = "\nResponse to command 1 "
+				+ new String(response);
+			} catch (ReaderException e) {
+				//basically a IllegalState Exception in case we forgot 
+				//to properly set-up the reader
+				e.printStackTrace();
+			}
+			
+			}
+			final String outputString = "Slot " + slotNum + ": "
+					+ stateStrings[prevState] + " -> "
+					+ stateStrings[currState]+ readOut;
+		    // Show output
+		    runOnUiThread(new Runnable() {
+
+		        @Override
+		        public void run() {
+		            logMsg(outputString);
+		        }
+		    });
+		}
+	}
+
+	private class OpenTask extends AsyncTask<UsbDevice, Void, Exception> {
 
         @Override
         protected Exception doInBackground(UsbDevice... params) {
@@ -579,65 +639,7 @@ public class MainActivity extends Activity {
 
         // Initialize reader
         mReader = new Reader(mManager);
-        mReader.setOnStateChangeListener(new OnStateChangeListener() {
-
-            @Override
-            public void onStateChange(int slotNum, int prevState, int currState) {
-
-                if (prevState < Reader.CARD_UNKNOWN
-                        || prevState > Reader.CARD_SPECIFIC) {
-                    prevState = Reader.CARD_UNKNOWN;
-                }
-
-                if (currState < Reader.CARD_UNKNOWN
-                        || currState > Reader.CARD_SPECIFIC) {
-                    currState = Reader.CARD_UNKNOWN;
-                }
-                /**
-                 * Here is the place where we need tu plug the NFC-Tools library in
-                 * We send byte[] commands and receive byte[] responses
-                 * The following command reads the second page of a Ultralight Tag
-                 * We need to properly power the device up and set protocols
-                 * The powering off is handled by other listeners so we don't need to worry about that
-                 */
-
-                // Create output string
-                byte[] command; 
-                command = new byte[] { (byte) 0xFF,(byte) 0xB0, 0x00, 0x08, 0x10 };
-				byte[] response = new byte[300];
-				String readOut ="";
-				//No use in tryng to read a card that's not there
-				if(currState == Reader.CARD_PRESENT){
-				try {
-					mReader.power(slotNum,
-							Reader.CARD_WARM_RESET);
-					mReader.setProtocol(slotNum, Reader.PROTOCOL_T0
-							| Reader.PROTOCOL_T1);
-					mReader.transmit(slotNum,
-								command, command.length, response,
-								response.length);
-					readOut = "\nResponse to command 1 "
-					+ new String(response);
-				} catch (ReaderException e) {
-					//basically a IllegalState Exception in case we forgot 
-					//to properly set-up the reader
-					e.printStackTrace();
-				}
-				
-				}
-				final String outputString = "Slot " + slotNum + ": "
-						+ stateStrings[prevState] + " -> "
-						+ stateStrings[currState]+ readOut;
-                // Show output
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        logMsg(outputString);
-                    }
-                });
-            }
-        });
+        mReader.setOnStateChangeListener(new ReaderStateChangeListener(mReader,new LoggingNdefOperationsListener()));
 
         // Register receiver for USB permission
         mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(

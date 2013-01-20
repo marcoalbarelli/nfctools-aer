@@ -30,7 +30,14 @@ public class ReaderStateChangeListener implements OnStateChangeListener {
 			try {
 				mReader.power(slotNum, Reader.CARD_WARM_RESET);
 				mReader.setProtocol(slotNum, Reader.PROTOCOL_T0 | Reader.PROTOCOL_T1);
-				ReaderApduTag apduTag = new ReaderApduTag(TagType.MIFARE_ULTRALIGHT, null, mReader, slotNum);
+				
+				// TODO identify the tag using the attributes
+				//	byte[] atr = mReader.getAtr(slotNum);
+				// for now let's assume it is a ultralight tag
+				
+				TagType tagType = TagType.MIFARE_ULTRALIGHT;
+				
+				ReaderApduTag apduTag = new ReaderApduTag(tagType, null, mReader, slotNum);
 				Type2NfcTagListener nfcTagListener = new Type2NfcTagListener(ndefOperationsListener);
 				nfcTagListener.handleTag(apduTag);
 			}
