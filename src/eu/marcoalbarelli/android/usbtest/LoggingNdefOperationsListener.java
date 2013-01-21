@@ -7,11 +7,18 @@ import org.nfctools.ndef.NdefOperationsListener;
 import org.nfctools.ndef.Record;
 import org.nfctools.ndef.wkt.records.UriRecord;
 
+import android.app.Activity;
 import android.util.Log;
 
 public class LoggingNdefOperationsListener implements NdefOperationsListener {
 
 	private static final String NFCTOOLS = "NFCTOOLS";
+	private static MainActivity caller;
+	
+	
+	public LoggingNdefOperationsListener(MainActivity activity){
+		caller = activity;
+	}
 
 	@Override
 	public void onNdefOperations(NdefOperations ndefOperations) {
@@ -21,6 +28,15 @@ public class LoggingNdefOperationsListener implements NdefOperationsListener {
 				Log.i(NFCTOOLS, "Found "+messages.size()+" NDEF records");
 				for (Record record : messages) {
 					Log.i(NFCTOOLS, "NDEF: " + record);
+					final String recordOut = record+"";
+					caller.runOnUiThread(new Runnable() {
+						
+				        @Override
+				        public void run() {
+				            caller.logMsg("NDEF: " + recordOut);
+				        }
+				    });  
+					
 				}
 			}
 			else {

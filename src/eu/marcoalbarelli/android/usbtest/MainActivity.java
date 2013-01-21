@@ -219,7 +219,7 @@ public class MainActivity extends Activity {
 		    command = new byte[] { (byte) 0xFF,(byte) 0xB0, 0x00, 0x08, 0x10 };
 			byte[] response = new byte[300];
 			String readOut ="";
-			//No use in tryng to read a card that's not there
+			//No use in trying to read a card that's not there
 			if(currState == Reader.CARD_PRESENT){
 			try {
 				mReader.power(slotNum,
@@ -252,6 +252,9 @@ public class MainActivity extends Activity {
 		}
 	}
 
+
+    
+    
 	private class OpenTask extends AsyncTask<UsbDevice, Void, Exception> {
 
         @Override
@@ -639,7 +642,7 @@ public class MainActivity extends Activity {
 
         // Initialize reader
         mReader = new Reader(mManager);
-        mReader.setOnStateChangeListener(new ReaderStateChangeListener(mReader,new LoggingNdefOperationsListener()));
+        mReader.setOnStateChangeListener(new ReaderStateChangeListener(mReader,new LoggingNdefOperationsListener(this)));
 
         // Register receiver for USB permission
         mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(
@@ -1897,7 +1900,7 @@ public class MainActivity extends Activity {
      * @param msg
      *            the message.
      */
-    private void logMsg(String msg) {
+    public void logMsg(String msg) {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("[dd-MM-yyyy HH:mm:ss]: ");
         Date date = new Date();
